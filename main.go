@@ -42,6 +42,7 @@ func main() {
 	*pointerToa = 13
 	fmt.Println("value of a var after it was changed through it's pointer", a)
 
+	// TODO: testing if push works
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// type from initializer
 	var c, d = 7455555555555548942, "string d";

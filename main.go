@@ -146,6 +146,7 @@ func main() {
 	for {
 		}
 	*/
+	// TODO:
 	// regular for loop with conditions
 	for i:= 0; i < 10; i++ {
 		// adding if statements

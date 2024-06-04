@@ -131,7 +131,7 @@ func main() {
 	// slices that share the same array, will see the changes
 	sliceFromArr[0] = 70
 	fmt.Println("elements of an array after changing an element from slice", arr)
-
+	// Creating a slice with []{1, 2, 3} first creates an array then builds a slice that references it
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// for as while

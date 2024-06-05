@@ -217,7 +217,7 @@ func main() {
 	sliceAppend = append(sliceAppend, 2, 3, 5, 5 ,6)
 	printSlice(sliceAppend)
 
-	// Range
+	// NOTE: Range
 	var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
 	// i will be the index, value(v) will be the current element of slice value
 	for i, value := range pow {
@@ -229,6 +229,12 @@ func main() {
 	for i := range pow{
 		fmt.Println("Using just the index", i)
 	}
+
+	// NOTE: index or value can be skipped
+	/*
+	for _, v := range pow
+	for i, _ := range pow
+	*/
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// for as while

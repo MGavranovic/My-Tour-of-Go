@@ -142,6 +142,14 @@ func main() {
 	fmt.Println("default high value", defHighValue)
 	fmt.Println("default no value", defNoValues)
 
+	// copying the slice into an array
+	// that array won't be the same as the underlying array of slice sliceIntoArr, but a new array that we can create a new slice from
+	sliceIntoArr := []int{1,2,3}
+	var arrFromSlice [3]int
+	copy(arrFromSlice[:], sliceIntoArr)
+	fmt.Println("This is a slice copied into the array", arrFromSlice)
+	fmt.Printf("This new array is of type (%T) and the slice is of type (%T)\n", arrFromSlice, sliceIntoArr)
+
 	// slices have both the length and the capacity NOTE:
 	// length is the number of elements it contains, while capacity is number of elements in it's array
 	// counting from the first element in the slice
@@ -158,6 +166,15 @@ func main() {
 	sliceCapLen = sliceCapLen[1:]
 	printSlice(sliceCapLen)
 
+	// NIL SLICE
+	// Zero value of a slice is nil
+	// nil slice capacity=0 length=0 and no underlying array
+	var nilSlice []int
+	fmt.Println("nil slice", nilSlice,"length =", len(nilSlice),"capacity =", cap(nilSlice))
+	// we can check if slice is nil
+	if(nilSlice == nil) {
+		fmt.Println("It's nil slice")
+	}
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// for as while
 	sum := 1

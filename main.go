@@ -133,6 +133,31 @@ func main() {
 	fmt.Println("elements of an array after changing an element from slice", arr)
 	// Creating a slice with []{1, 2, 3} first creates an array then builds a slice that references it
 
+	// slice defaults
+	// [x:y] low-x and high-y bound can be omitted and their values would be 0:len(array)
+	defLowValue := arr[:2]
+	defHighValue := arr[1:]
+	defNoValues := arr[:]
+	fmt.Println("default low value", defLowValue)
+	fmt.Println("default high value", defHighValue)
+	fmt.Println("default no value", defNoValues)
+
+	// slices have both the length and the capacity NOTE:
+	// length is the number of elements it contains, while capacity is number of elements in it's array
+	// counting from the first element in the slice
+	sliceCapLen := []int{1,2,3,4,5,6}
+	printSlice(sliceCapLen)
+	// lowering the length while capacity stays the same
+	// slice will be empty while the array won't
+	sliceCapLen = sliceCapLen[:0]
+	printSlice(sliceCapLen)
+	// lowering the length
+	sliceCapLen = sliceCapLen[:3]
+	printSlice(sliceCapLen)
+	// reducing both the capacity of the array as well as the length of it's slice
+	sliceCapLen = sliceCapLen[1:]
+	printSlice(sliceCapLen)
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// for as while
 	sum := 1
@@ -147,7 +172,7 @@ func main() {
 	for {
 		}
 	*/
-	// TODO:
+
 	// regular for loop with conditions
 	for i:= 0; i < 10; i++ {
 		// adding if statements
@@ -214,6 +239,11 @@ func main() {
 	// defer will wait for surrounding functions to execute
 	deferTest()
 	
+}
+
+// for printing slices
+func printSlice(s []int){
+ fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////

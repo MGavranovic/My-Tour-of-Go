@@ -197,7 +197,18 @@ func main() {
 		fmt.Printf("%s\n", strings.Join(slicesOfSlices[i], " "))
 	}
 
-
+	// Appending to a slice
+	// NOTE: append(slice []T, values)
+	// you can add multiple values
+	// NOTE: if the corresponding array is too small to fit the new values, a new array will be allocated.
+	// NOTE: the returned slice (returned from the append()) will point to the newly allocated array
+	var sliceAppend []int;
+	sliceAppend = append(sliceAppend, 1)
+	printSlice(sliceAppend)
+	
+	// adding more than 1 value using append
+	sliceAppend = append(sliceAppend, 2, 3, 5, 5 ,6)
+	printSlice(sliceAppend)
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// for as while
 	sum := 1

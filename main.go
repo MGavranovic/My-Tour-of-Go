@@ -177,6 +177,13 @@ func main() {
 		fmt.Println("It's nil slice")
 	}
 
+	// creating slices using make
+	// make([]T, len, cap)
+	// NOTE: this allocates a zeroed and returns a slice that points to that array
+	sliceMake := make([]int, 0, 5)
+	fmt.Printf("Slice with make ")
+	printSlice(sliceMake)
+
 	// TODO: this will be required for my future project
 	// Slices of slices
 	slicesOfSlices := [][]string{

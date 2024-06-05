@@ -8,6 +8,7 @@ import (
 	// "math/cmplx"
 	"math/rand"
 	"runtime"
+	"strings"
 	"time"
 )
 
@@ -150,7 +151,7 @@ func main() {
 	fmt.Println("This is a slice copied into the array", arrFromSlice)
 	fmt.Printf("This new array is of type (%T) and the slice is of type (%T)\n", arrFromSlice, sliceIntoArr)
 
-	// slices have both the length and the capacity NOTE:
+	// NOTE: slices have both the length and the capacity 
 	// length is the number of elements it contains, while capacity is number of elements in it's array
 	// counting from the first element in the slice
 	sliceCapLen := []int{1,2,3,4,5,6}
@@ -175,6 +176,28 @@ func main() {
 	if(nilSlice == nil) {
 		fmt.Println("It's nil slice")
 	}
+
+	// TODO: this will be required for my future project
+	// Slices of slices
+	slicesOfSlices := [][]string{
+		[]string{"_","_","_"},  // or {"_","_","_"},
+		[]string{"_","_","_"},  // or {"_","_","_"},
+		[]string{"_","_","_"},  // or {"_","_","_"},
+	}
+
+	
+	slicesOfSlices[0][0] = "X"
+	slicesOfSlices[0][2] = "O"
+	slicesOfSlices[1][0] = "X"
+	slicesOfSlices[1][1] = "O"
+	slicesOfSlices[2][2] = "X"
+	fmt.Println(slicesOfSlices)
+
+	for i := 0; i < len(slicesOfSlices); i++ {
+		fmt.Printf("%s\n", strings.Join(slicesOfSlices[i], " "))
+	}
+
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// for as while
 	sum := 1

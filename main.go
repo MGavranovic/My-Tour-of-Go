@@ -26,6 +26,10 @@ type TestStruct struct{
 	Y int
 }
 
+// struct for maps
+type MapStruct struct{
+	Lat, Long float64
+}
 
 func main() {
 	// type is implicit > := can only be used inside of functions
@@ -237,12 +241,62 @@ func main() {
 	*/
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// NOTE: MAPS
+	// similar concept with JS Objects key-value pairs
+	// map maps keys to values
+	// zero value of a map is nil and it has no keys and keys can't be added
+
+
+	var m map[string] MapStruct
+	if m == nil{
+		fmt.Println("Declared map",m) 
+	}
+
+	m = make(map[string]MapStruct)
+	m["Banjaluka"] = MapStruct{
+		40.566, 14.965,
+	}
+	fmt.Println("Map key value", m["Banjaluka"])
+	fmt.Printf("Type = %T of map and it's value = %v\n", m, m)
+
+	// NOTE: overwriting the original value of m
+	// assignment can be done without using MapStruct 
+
+	// to assign a value to a key and not overwrite the whole thing m[key] = MapStruct{value}
+	m = map[string]MapStruct {
+		"Sarajevo" : {15.364, 56.198,},
+		"Zagreb": {25.364, -56.198,},
+		/*
+		"Sarajevo": MapStruct{ // 
+			15.364, 56.198,
+		},
+		"Zagreb": MapStruct{
+			25.364, -56.198,
+		},
+		*/
+	}
+
+	// NOTE: testing maps
+	// map[datatype]datatype -> can use structs as structs are just a composite datatype or can use regular datatype as int, string...
+	// ... in the place of both the int and string belows
+	var testMap = map[string]int{
+		"one": 1,
+		"two": 2,
+	}
+	fmt.Println("Test map with ints", testMap)
+
+
+	fmt.Println("Map after using Map literals", m)
+	fmt.Println("map bl", m["Banjaluka"]) // this will print {0, 0} as it's value got overwritten in the block above marked with note
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// for as while
 	sum := 1
 	for ; sum < 1000; {
 		sum += sum
 		// fmt.Println(sum)
 	}
+	
 	fmt.Println(sum)
 
 	// any for loop with no conditions will be an infinite loop

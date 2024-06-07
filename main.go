@@ -285,9 +285,26 @@ func main() {
 	}
 	fmt.Println("Test map with ints", testMap)
 
-
 	fmt.Println("Map after using Map literals", m)
 	fmt.Println("map bl", m["Banjaluka"]) // this will print {0, 0} as it's value got overwritten in the block above marked with note
+
+	// NOTE: Mutating maps
+	// m[key] = value
+	testMap["one"] = 2
+	fmt.Println("Reassigning the value of a key",testMap["one"])
+	// to get an element > element = m[key]
+	elFromMap := testMap["one"]
+	fmt.Println("Getting an element from the map", elFromMap)
+	// to delete an element > delete(m, key)
+	testMap["three"] = 3
+	fmt.Println("Adding another element to the map", testMap["three"],"to map >", testMap)
+	delete(testMap, "three")
+	fmt.Println("Map after one element is deleted", testMap)
+	// check if key is present element, ok = m[key]
+	el, ok := testMap["three"] 
+	fmt.Println("Print value", el, "Exist in map?", ok)
+	el2, ok := testMap["one"] 
+	fmt.Println("Print value", el2, "Exist in map?", ok)
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// for as while

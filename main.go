@@ -31,6 +31,10 @@ type MapStruct struct{
 	Lat, Long float64
 }
 
+func compute(fn func(float64, float64)float64,) float64{
+		return fn(3, 4)
+}
+
 func main() {
 	// type is implicit > := can only be used inside of functions
 	a := 2;
@@ -306,6 +310,19 @@ func main() {
 	el2, ok := testMap["one"] 
 	fmt.Println("Print value", el2, "Exist in map?", ok)
 
+	// NOTE: Function values
+	// Functions are values too and can be passed as args for other functions
+	hypot := func (x, y float64) float64 {
+		return math.Sqrt(x*x + y*y)
+	}
+	fmt.Println("Function values ****************************************************")
+	fmt.Println(math.Sqrt(5*5 + 12*12))
+	fmt.Println(hypot(5, 12))
+	fmt.Println(math.Sqrt(3*3 + 4*4))
+	fmt.Println(compute(hypot)) // hypot called with inside compute resulting in fn(3,4) > hypot(3,4)
+	fmt.Println(compute(hypot)) // hypot called with inside compute resulting in fn(3,4) > hypot(3,4)
+	fmt.Println(compute(math.Pow)) // math.Pow > math.Pow(3*3*3*3) 3 to the power of 4 which ar like default args
+	fmt.Println("Function values ****************************************************")
 
 
 	// NOTE: For loop

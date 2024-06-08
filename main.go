@@ -31,6 +31,15 @@ type MapStruct struct{
 	Lat, Long float64
 }
 
+// func for func closures
+func adder() func(int) int {
+	sum := 0
+	return func(x int) int {
+		sum += x
+		return sum
+	}
+}
+
 func compute(fn func(float64, float64)float64,) float64{
 		return fn(3, 4)
 }
@@ -324,6 +333,16 @@ func main() {
 	fmt.Println(compute(math.Pow)) // math.Pow > math.Pow(3*3*3*3) 3 to the power of 4 which ar like default args
 	fmt.Println("Function values ****************************************************")
 
+	// NOTE: Function closures 
+	// Go functions may be closures. A closure is a function value that references variables from outside its body. 
+	// The function may access and assign to the referenced variables; in this sense the function is "bound" to the variables.
+	// For example, the adder function returns a closure. Each closure is bound to its own sum variable.
+
+	pos, neg := adder(), adder()
+	for i := 0; i < 10; i++ {
+		fmt.Println("Positive",pos(i))
+		fmt.Println("Negative",neg(-2*i))
+	}
 
 	// NOTE: For loop
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -408,6 +427,12 @@ func main() {
 	// defer will wait for surrounding functions to execute
 	deferTest()
 	
+
+	// NOTE: Fibonacci
+	f := fibonacci()
+	for i := 0; i < 10; i++ {
+		fmt.Println(f())
+	}
 }
 
 // for printing slices
@@ -619,6 +644,17 @@ func WordCount(s string) map[string]int {
 func main() {
 	wc.Test(WordCount)
 }
-
-
 */
+// NOTE: Fibonacci function
+
+// fibonacci is a function that returns
+// a function that returns an int.
+func fibonacci() func() int {
+	first := 0
+	second := 1
+	return func() int {
+		next := first
+		first, second = second, first + second
+		return next
+	}
+}

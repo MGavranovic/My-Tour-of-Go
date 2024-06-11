@@ -35,6 +35,8 @@ type TestMethod struct{
 	X, Y float64
 }
 
+type NonStruct float64
+
 // struct for maps
 type MapStruct struct{
 	Lat, Long float64
@@ -452,7 +454,13 @@ func main() {
 	// without defining the method again for this struct, Abs would be undefined
 	fmt.Println("Testing method on a dif struct", valForDifMethod.Abs()) 
 	// this works only if the method is defined for this struct or any datatype
+	// methods on regular types
+	valForRegType := NonStruct(-2.2)
+	fmt.Println("Non Struct meaning regular type method", valForRegType)
+
+
 } // NOTE: end of main func
+
 
 // NOTE: METHODS
 // Go doesn't have classes
@@ -460,6 +468,7 @@ func main() {
 // Abs is the name of the function and the receiver is the part between func keyword and the method name
 // Abs with receiver of type MethodStruct with v as a value
 // if I had a new struct this method wouldn't be accessible from it
+// NOTE: methods are just like functions with a receiver arg
 func (v MethodStruct) Abs() float64{
 	return math.Sqrt(v.X*v.X+v.Y*v.Y)
 }
@@ -467,7 +476,18 @@ func (v MethodStruct) Abs() float64{
 func (v TestMethod) Abs() float64{
 	return math.Sqrt(v.X*v.X+v.Y*v.Y)
 }
-
+// NOTE: Method can be declared on non-struct types as well
+func (v NonStruct) Abs() float64{
+	if (v == 0) {
+		return float64(-v)
+	}
+	return float64(v)
+}
+// NOTE:
+/*
+You can only declare a method with a receiver whose type is defined in the same package as the method. You cannot declare \
+a method with a receiver whose type is defined in another package (which includes the built-in types such as int).
+*/
 // for printing slices
 func printSlice(s []int){
  fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)

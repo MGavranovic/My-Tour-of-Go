@@ -433,7 +433,7 @@ func main() {
 	for i := 0; i < 10; i++ {
 		fmt.Println(f())
 	}
-}
+} // NOTE: end of main func
 
 // for printing slices
 func printSlice(s []int){

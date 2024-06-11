@@ -26,6 +26,15 @@ type TestStruct struct{
 	Y int
 }
 
+type MethodStruct struct{
+	X, Y float64
+}
+
+// this will be used to point out the fact that the methods are "attached" to a type they are defined for
+type TestMethod struct{
+	X, Y float64
+}
+
 // struct for maps
 type MapStruct struct{
 	Lat, Long float64
@@ -433,7 +442,31 @@ func main() {
 	for i := 0; i < 10; i++ {
 		fmt.Println(f())
 	}
+
+	// NOTE: METHODS
+	valueForMethods := MethodStruct{3, 4}
+	fmt.Println("this is the method section starting **********************************************************************")
+	fmt.Println("Method on the MethodStruct", valueForMethods.Abs())
+    // trying to access the same method from a different type
+	valForDifMethod := TestMethod{3, 4}
+	// without defining the method again for this struct, Abs would be undefined
+	fmt.Println("Testing method on a dif struct", valForDifMethod.Abs()) 
+	// this works only if the method is defined for this struct or any datatype
 } // NOTE: end of main func
+
+// NOTE: METHODS
+// Go doesn't have classes
+// but it's possible to define methods on types (will be using MethodStruct from line 30)
+// Abs is the name of the function and the receiver is the part between func keyword and the method name
+// Abs with receiver of type MethodStruct with v as a value
+// if I had a new struct this method wouldn't be accessible from it
+func (v MethodStruct) Abs() float64{
+	return math.Sqrt(v.X*v.X+v.Y*v.Y)
+}
+// defining the function for a dif struct	
+func (v TestMethod) Abs() float64{
+	return math.Sqrt(v.X*v.X+v.Y*v.Y)
+}
 
 // for printing slices
 func printSlice(s []int){

@@ -447,8 +447,12 @@ func main() {
 
 	// NOTE: METHODS
 	valueForMethods := MethodStruct{3, 4}
+	testPointer := &valueForMethods
+	testValPoint := *testPointer
 	fmt.Println("this is the method section starting **********************************************************************")
 	fmt.Println("Method on the MethodStruct", valueForMethods.Abs())
+	fmt.Println("Testing pointer **********************************************", testPointer)
+	fmt.Println("Testing pointer **********************************************", testValPoint)
     // trying to access the same method from a different type
 	valForDifMethod := TestMethod{3, 4}
 	// without defining the method again for this struct, Abs would be undefined
@@ -458,6 +462,24 @@ func main() {
 	valForRegType := NonStruct(-2.2)
 	fmt.Println("Non Struct meaning regular type method", valForRegType)
 
+	// NOTE: Pointer receivers
+	pValRec := MethodStruct{3, 4}
+	pValRec.Scale(10)
+	fmt.Println("Pointer receiver",pValRec.Abs()) // prints 5 if the receiver is not a pointer
+
+	// *T receiver of type T and it can't be another receiver
+	// Methods with pointer receivers can modify the value to which the receiver points (as Scale does here). 
+	// Since methods often need to modify their receiver, pointer receivers are more common than value receivers.
+	// if a regular value receiver is used on the struct in this example, it would be working on a copy of that struct
+	// this is the same as for any functions argument
+	// using a pointer receiver, allows us to change the value of the original struct, 
+
+	pValRec2 := MethodStruct{3, 4}
+	Scale2(&pValRec2, 10) // memory location of pValRec2, and 10
+	fmt.Println("Pointer in a regular func", pValRec2.Abs())
+	fmt.Println("Memory location", &pValRec2) // not getting the exact memory location needs to be formatted 
+	// to get the proper memory location
+	fmt.Printf("Proper memory location %p\n", &pValRec2)
 
 } // NOTE: end of main func
 
@@ -488,6 +510,19 @@ func (v NonStruct) Abs() float64{
 You can only declare a method with a receiver whose type is defined in the same package as the method. You cannot declare \
 a method with a receiver whose type is defined in another package (which includes the built-in types such as int).
 */
+
+// NOTE: pointer receiver
+func (v *MethodStruct) Scale(f float64){
+	v.X = v.X * f
+	v.Y = v.Y * f
+}
+
+// scale as regular function
+func Scale2 (v *MethodStruct, f float64){
+	v.X = v.X * f
+	v.Y = v.Y * f
+}
+
 // for printing slices
 func printSlice(s []int){
  fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)

@@ -477,7 +477,7 @@ func main() {
 	fmt.Println("Pointer in a regular func", pValRec2.Abs())
 	fmt.Println("Memory location", &pValRec2) // not getting the exact memory location needs to be formatted
 	// to get the proper memory location
-	fmt.Printf("Proper memory location %p\n", &pValRec2)
+	fmt.Printf("Proper memory location formatted %p\n", &pValRec2)
 
 } // NOTE: end of main func
 

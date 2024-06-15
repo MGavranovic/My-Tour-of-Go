@@ -52,6 +52,11 @@ func adder() func(int) int {
 	}
 }
 
+// interfaces
+type MethodInterface interface {
+	Abs() float64
+}
+
 func compute(fn func(float64, float64) float64) float64 {
 	return fn(3, 4)
 }
@@ -479,6 +484,18 @@ func main() {
 	// to get the proper memory location
 	fmt.Printf("Proper memory location formatted %p\n", &pValRec2)
 
+	// NOTE: Interfaces
+	// An interface type, is defined as set of method signatures
+	// a value of type interface, can hold any value that implements those methods
+	var varForInterface MethodInterface
+	var1 := MethodStruct{3, 4}
+	var2 := NonStruct(-math.Sqrt2)
+
+	varForInterface = var2  // varForInterface NonStruct implements MethodInterface
+	varForInterface = &var1 // varForInterface *MethodStruct implements MethodInterface
+	// i would not be able to do this varForInterface = var1 as var1 is a *MethodStruct type
+
+	fmt.Println("Interface *******************************", varForInterface.Abs())
 } // NOTE: end of main func
 
 // NOTE: METHODS
@@ -488,7 +505,7 @@ func main() {
 // Abs with receiver of type MethodStruct with v as a value
 // if I had a new struct this method wouldn't be accessible from it
 // NOTE: methods are just like functions with a receiver arg
-func (v MethodStruct) Abs() float64 {
+func (v *MethodStruct) Abs() float64 {
 	return math.Sqrt(v.X*v.X + v.Y*v.Y)
 }
 
@@ -558,6 +575,8 @@ The second is to avoid copying the value on each method call. This can be more e
 In this example, both Scale and Abs are methods with receiver type *Vertex, even though the Abs method needn't modify its receiver.
 In general, all methods on a given type should have either value or pointer receivers, but not a mixture of both.
 */
+
+// NOTE: INTERFACES
 
 // for printing slices
 func printSlice(s []int) {

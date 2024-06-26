@@ -65,10 +65,24 @@ type T struct {
 	S string
 }
 
+type F float64
+
 // NOTE: type T implements interface I which means that the interface here is implemented implicitly
 // type implements the interface by implementing it's method
-func (t T) M() {
+//
+//	func (t T) M() {
+//		fmt.Println(t.S)
+//	}
+func (t *T) M() {
 	fmt.Println(t.S)
+}
+
+func (f F) M() {
+	fmt.Println(f)
+}
+
+func describe(i I) {
+	fmt.Printf("(%v, %T)\n", i, i)
 }
 
 func compute(fn func(float64, float64) float64) float64 {
@@ -511,7 +525,25 @@ func main() {
 
 	fmt.Println("Interface *******************************", varForInterface.Abs())
 
-	var i I = T{"string"}
+	// var i I = T{"string"}
+	// i.M()
+
+	// NOTE: interface values can be considered as a tuple (pair), of a value and a type
+	// (value, type)
+	// An interface value holds a value of a specific underlying concrete type.
+	// Calling a method on an interface value executes the method of the same name on its underlying type.
+
+	// for the type in describe function
+	// the printed type will include main (main.actualltype)
+	// the reason for that is that custom types to avoid any confusion from having the custom types
+	// it uses that to point to "origin" of the type / a path to types location
+	var i I
+	i = &T{"Hello"}
+	describe(i)
+	i.M()
+
+	i = F(math.Pi)
+	describe(i)
 	i.M()
 } // NOTE: end of main func
 

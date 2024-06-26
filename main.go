@@ -57,6 +57,20 @@ type MethodInterface interface {
 	Abs() float64
 }
 
+type I interface {
+	M()
+}
+
+type T struct {
+	S string
+}
+
+// NOTE: type T implements interface I which means that the interface here is implemented implicitly
+// type implements the interface by implementing it's method
+func (t T) M() {
+	fmt.Println(t.S)
+}
+
 func compute(fn func(float64, float64) float64) float64 {
 	return fn(3, 4)
 }
@@ -496,6 +510,9 @@ func main() {
 	// i would not be able to do this varForInterface = var1 as var1 is a *MethodStruct type
 
 	fmt.Println("Interface *******************************", varForInterface.Abs())
+
+	var i I = T{"string"}
+	i.M()
 } // NOTE: end of main func
 
 // NOTE: METHODS
